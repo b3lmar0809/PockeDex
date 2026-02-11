@@ -1,6 +1,6 @@
 import  {useState, useEffect} from "react";
-import ButtomAtom from "../atoms/ButtonAtom.tsx";
-import TextAtom from "../atoms/TextAtom.tsx";
+import ButtomAtom from "../atoms/ButtonAtom";
+import TextAtom from "../atoms/TextAtom";
 import '../../style/components/organisms/NavBar.css'
 
 const NavBar: React.FC = () => {
@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
                 </ButtomAtom>
 
                 <TextAtom variant='ul' className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
-                    <TextAtom variant='li'><a href="/">Inicio</a></TextAtom>
+                    <TextAtom variant='li' className="li-a"><a href="/">Inicio</a></TextAtom>
                     <TextAtom variant='li'><a href='/'>Servicio</a></TextAtom>
                     <TextAtom variant='li'><a href='/'>Nosotros</a></TextAtom>
                     <TextAtom variant='li'><a href='/'>Contacto</a></TextAtom>
