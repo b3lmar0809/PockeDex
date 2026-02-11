@@ -1,5 +1,5 @@
 
-import Navbar from "./components/organisms/NavBar.tsx";
+import Navbar from "./components/organisms/NavBar";
 
 function App() {
 
