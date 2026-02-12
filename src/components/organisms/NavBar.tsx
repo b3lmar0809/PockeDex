@@ -1,25 +1,29 @@
-import  {useState, useEffect} from "react";
-import ButtomAtom from "../atoms/ButtonAtom";
-import TextAtom from "../atoms/TextAtom";
+import React, {useState, useEffect} from "react";
 import '../../style/components/organisms/NavBar.css'
 
 const NavBar: React.FC = () => {
-    const [scrolled, setScrolled] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState<boolean>(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-          const isScrolled = window.scrollY > 50;
-          setScrolled(isScrolled);
+        const handleScroll = (): void => {
+            const isScrolled = window.scrollY > 50;
+            setScrolled(isScrolled);
+            if (menuOpen){
+                setMenuOpen(false);
+            }
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [menuOpen]);
 
-    const toggleMenu = () => {
-      setMenuOpen(!menuOpen);
+    const toggleMenu = ():void => {
+        setMenuOpen(!menuOpen);
     };
+
+    const closeMenu = ():void => {
+        setMenuOpen(false)
+    }
 
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -28,20 +32,24 @@ const NavBar: React.FC = () => {
                     <a href="/">PockeDex</a>
                 </div>
 
-                <ButtomAtom className={`menu-toggle ${menuOpen ? 'active' : ''}`}
-                            text={''} onClick={toggleMenu} aria-label='Toggle menu'
+                {/* ✅ Botón hamburguesa SIMPLIFICADO */}
+                <button
+                    className={`menu-toggle ${menuOpen ? 'active' : ''}`}
+                    onClick={toggleMenu}
+                    aria-label='Toggle menu'
                 >
-                    <TextAtom variant='span'>''</TextAtom>
-                    <TextAtom variant='span'>''</TextAtom>
-                    <TextAtom variant='span'>''</TextAtom>
-                </ButtomAtom>
+                    <span className="span"></span>
+                    <span className="span"></span>
+                    <span className="span"></span>
+                </button>
 
-                <TextAtom variant='ul' className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
-                    <TextAtom variant='li' className="li-a"><a href="/">Inicio</a></TextAtom>
-                    <TextAtom variant='li'><a href='/'>Servicio</a></TextAtom>
-                    <TextAtom variant='li'><a href='/'>Nosotros</a></TextAtom>
-                    <TextAtom variant='li'><a href='/'>Contacto</a></TextAtom>
-                </TextAtom>
+                {/* ✅ Menú SIMPLIFICADO */}
+                <ul className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
+                    <li className="li"><a href="/" onClick={closeMenu}>Inicio</a></li>
+                    <li className="li"><a href='/' onClick={closeMenu}>Servicio</a></li>
+                    <li className="li"><a href='/' onClick={closeMenu}>Nosotros</a></li>
+                    <li className="li"><a href='/' onClick={closeMenu}>Contacto</a></li>
+                </ul>
             </div>
         </nav>
     )

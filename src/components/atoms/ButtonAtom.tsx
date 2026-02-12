@@ -1,14 +1,14 @@
-import type {ButtonHTMLAttributes} from "react";
+import type {ButtonHTMLAttributes, ReactNode} from "react";
 
 type ButtonAtomProp = {
-    text: string;
     className?: string;
+    children?: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-function ButtomAtom({text, className, ...props}: ButtonAtomProp) {
+function ButtomAtom({ className, children, ...props}: ButtonAtomProp) {
     return(
         <button className={className} {...props}>
-            {text}
+            {children}
         </button>
     )
 }
