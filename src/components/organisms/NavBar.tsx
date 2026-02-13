@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import ButtomAtom from "../atoms/ButtonAtom";
+import TextAtom from "../atoms/TextAtom";
 import '../../style/components/organisms/NavBar.css'
 
 const NavBar: React.FC = () => {
@@ -9,13 +11,10 @@ const NavBar: React.FC = () => {
         const handleScroll = (): void => {
             const isScrolled = window.scrollY > 50;
             setScrolled(isScrolled);
-            if (menuOpen){
-                setMenuOpen(false);
-            }
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [menuOpen]);
+    }, []);
 
     const toggleMenu = ():void => {
         setMenuOpen(!menuOpen);
@@ -32,24 +31,20 @@ const NavBar: React.FC = () => {
                     <a href="/">PockeDex</a>
                 </div>
 
-                {/* ✅ Botón hamburguesa SIMPLIFICADO */}
-                <button
-                    className={`menu-toggle ${menuOpen ? 'active' : ''}`}
-                    onClick={toggleMenu}
-                    aria-label='Toggle menu'
+                <ButtomAtom className={`menu-toggle ${menuOpen ? 'active' : ''}`}
+                            onClick={toggleMenu} aria-label='Toggle menu'
                 >
-                    <span className="span"></span>
-                    <span className="span"></span>
-                    <span className="span"></span>
-                </button>
+                    <TextAtom variant='span' className="span"> </TextAtom>
+                    <TextAtom variant='span' className="span"> </TextAtom>
+                    <TextAtom variant='span' className="span"> </TextAtom>
+                </ButtomAtom>
 
-                {/* ✅ Menú SIMPLIFICADO */}
-                <ul className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
-                    <li className="li"><a href="/" onClick={closeMenu}>Inicio</a></li>
-                    <li className="li"><a href='/' onClick={closeMenu}>Servicio</a></li>
-                    <li className="li"><a href='/' onClick={closeMenu}>Nosotros</a></li>
-                    <li className="li"><a href='/' onClick={closeMenu}>Contacto</a></li>
-                </ul>
+                <TextAtom variant='ul' className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
+                    <TextAtom variant='li' className="li"><a href="/" onClick={closeMenu}>Inicio</a></TextAtom>
+                    <TextAtom variant='li' className="li"><a href='/' onClick={closeMenu}>Servicio</a></TextAtom>
+                    <TextAtom variant='li' className="li"><a href='/' onClick={closeMenu}>Nosotros</a></TextAtom>
+                    <TextAtom variant='li' className="li"><a href='/' onClick={closeMenu}>Contacto</a></TextAtom>
+                </TextAtom>
             </div>
         </nav>
     )
