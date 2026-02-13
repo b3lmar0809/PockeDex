@@ -1,27 +1,29 @@
 .navbar {
-    position: fixed;
+    position: fixed; /* mantiene el navbar fijo en la parte superior */
     top: 0;
     left: 0;
     width: 100%;
     padding: 24px 0;
-    background: transparent;
-    transition: all 0.3s ease;
-    z-index: 1000;
+    background: transparent; /* fondo transparente inicial */
+    transition: all 0.3s ease; /* suaviza el cambio de estado al hacer scroll */
+    z-index: 1000; /* asegura que esté por encima de otros elementos */
 }
 
+/* estado del navbar cuando el usuario hace scroll */
 .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.55); /* fondo semi-transparente oscuro */
+    backdrop-filter: blur(10px); /* efecto de desenfoque del fondo */
     padding: 16px 10px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); /* sombra sutil */
 }
 
+/* contenedor que limita el ancho del contenido */
 .navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1200px; /* ancho máximo del contenido */
+    margin: 0 auto; /* centra el contenedor */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Separa logo y menu */
+    align-items: center; /* Centra verticalmente */
     padding: 0 16px;
 }
 
@@ -51,19 +53,20 @@
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
-    position: relative;
+    position: relative; /* necesario para el efecto ::after */
     transition: color 0.3s ease;
 }
 
+/* linea animada debajo de los links */
 .navbar-menu .li a::after {
     content: '';
     position: absolute;
     bottom: -5px;
     left: 0;
-    width: 0;
+    width: 0; /* inicia sin ancho */
     height: 2px;
     background: #64d5f6;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease; /* anima el crecimiento de la línea */
 }
 
 .navbar-menu .li a:hover {
@@ -71,9 +74,11 @@
 }
 
 .navbar-menu .li a:hover::after {
-    width: 100%;
+    width: 100%; /* la línea crece al 100% en hover */
 }
 
+
+/* oculto en desktop, visible solo en movil */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -81,28 +86,30 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 1001;
+    z-index: 1001; /* por encima del navbar */
 }
 
+/* las 3 lineas de la hamburguesa */
 .menu-toggle .span {
     width: 25px;
     height: 3px;
     background: white;
     margin: 3px 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* suaviza la animacion de transformacion */
     border-radius: 3px;
 }
 
+/* animacion cuando el menu está activo (forma de x) */
 .menu-toggle.active .span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(8px, 8px); /* linea superior gira */
 }
 
 .menu-toggle.active .span:nth-child(2) {
-    opacity: 0;
+    opacity: 0; /* linea del medio desaparece */
 }
 
 .menu-toggle.active .span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(7px, -7px); /* linea inferior gira */
 }
 
 @media (max-width: 480px) {
@@ -111,8 +118,9 @@
         padding: 0 42px;
     }
 
+    /* mostrar el boton hamburguesa en movil */
     .menu-toggle {
-        display: flex ;
+        display: flex;
         gap: 4px;
     }
 
@@ -124,30 +132,32 @@
     }
 
     .menu-toggle.active .span {
-        background: white;
+        background: white; /* mantiene color blanco cuando esta activo */
     }
 
+    /* menu movil desplegable */
     .navbar-menu {
-        position: fixed;
+        position: fixed; /* posicion fija en la pantalla */
         top: 0;
         left: 0;
         width: 100%;
-        height: auto;
+        height: auto; /* solo ocupa el espacio necesario */
         background: rgba(0, 0, 0, 0.55);
         backdrop-filter: blur(10px);
-        flex-direction: column;
+        flex-direction: column; /* items en columna */
         justify-content: center;
         padding: 80px 2px 32px;
         gap: 32px;
         align-items: center;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+        transform: translateY(-100%); /* oculto arriba por defecto */
+        transition: transform 0.4s ease; /* suaviza la animacion de deslizamiento */
+        overflow-y: auto; /* permite scroll si es necesario */
+        overscroll-behavior: contain; /* evita que el scroll se propague al body */
     }
 
+    /* menu visible cuando esta activo */
     .navbar-menu.active {
-        transform: translateY(0);
+        transform: translateY(0); /* desliza hacia abajo */
     }
 
     .navbar-menu .li a {
@@ -155,6 +165,7 @@
         color: white;
     }
 
+    /* oculta el efecto de línea animada en movil */
     .navbar-menu .li a::after {
         display: none;
     }
