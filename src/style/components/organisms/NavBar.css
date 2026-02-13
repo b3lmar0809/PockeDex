@@ -133,7 +133,7 @@
         left: 0;
         width: 100%;
         height: auto;
-        background: rgba(0, 0, 0, 0.95);
+        background: rgba(0, 0, 0, 0.55);
         backdrop-filter: blur(10px);
         flex-direction: column;
         justify-content: center;
